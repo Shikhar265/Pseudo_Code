@@ -1,0 +1,35 @@
+ENUM TrafficLight
+    RED, YELLOW, GREEN
+END ENUM
+
+CLASS TrafficController
+    ATTRIBUTE currentLight
+    ATTRIBUTE intervalInSeconds
+
+    METHOD Constructor(startLight, interval)
+        SET currentLight = startLight
+        SET intervalInSeconds = interval
+    END METHOD
+
+    METHOD switchLight()
+        IF currentLight == RED THEN
+            SET currentLight = GREEN
+        ELSE IF currentLight == GREEN THEN
+            SET currentLight = YELLOW
+        ELSE IF currentLight == YELLOW THEN
+            SET currentLight = RED
+        END IF
+    END METHOD
+
+    METHOD startSimulation(cycles)
+        FOR i from 1 to cycles
+            PRINT "Current Light: " + currentLight
+            WAIT intervalInSeconds
+            CALL switchLight()
+        END FOR
+    END METHOD
+END CLASS
+
+MAIN:
+    CREATE controller = TrafficController(RED, 5)
+    CALL controller.startSimulation(6)

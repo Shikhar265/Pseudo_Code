@@ -1,0 +1,31 @@
+CLASS Transaction<T>
+    ATTRIBUTE paymentMethod (T)
+    ATTRIBUTE amount
+
+    METHOD Constructor(paymentMethod, amount)
+        SET attributes
+
+    METHOD process()
+        PRINT "Processing payment via " + paymentMethod + " of amount " + amount
+END CLASS
+
+CLASS UPI
+    ATTRIBUTE upiId
+END CLASS
+
+CLASS Card
+    ATTRIBUTE cardNumber
+END CLASS
+
+CLASS NetBanking
+    ATTRIBUTE accountNumber
+END CLASS
+
+MAIN:
+    CREATE Transaction<UPI> t1
+    CREATE Transaction<Card> t2
+    CREATE Transaction<NetBanking> t3
+    CALL t1.process()
+    CALL t2.process()
+    CALL t3.process()
+	

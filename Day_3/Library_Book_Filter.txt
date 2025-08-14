@@ -1,0 +1,14 @@
+CLASS Book
+    ATTRIBUTE title, publishYear, rating
+END CLASS
+
+MAIN:
+    CREATE bookList
+
+    filteredBooks = bookList.stream()
+                     .filter(book.publishYear > 2015)
+                     .filter(book.rating > 4.5)
+                     .collect(toList)
+
+    FOR each book in filteredBooks
+        PRINT book.title

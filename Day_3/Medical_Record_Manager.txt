@@ -1,0 +1,31 @@
+INTERFACE Searchable
+    METHOD search(criteria)
+
+INTERFACE Printable
+    METHOD printReport()
+
+CLASS LabReport IMPLEMENTS Searchable, Printable
+    ATTRIBUTE patientName, testResults
+
+    METHOD search(criteria)
+        RETURN criteria matches patientName or test type
+
+    METHOD printReport()
+        PRINT "Lab Report for " + patientName
+END CLASS
+
+CLASS Prescription IMPLEMENTS Searchable, Printable
+    ATTRIBUTE patientName, medicines
+
+    METHOD search(criteria)
+        RETURN criteria matches patientName or medicine name
+
+    METHOD printReport()
+        PRINT "Prescription for " + patientName
+END CLASS
+
+MAIN:
+    CREATE reports list of Searchable & Printable objects
+    FOR each report in reports
+        IF report.search("John") == true
+            CALL report.printReport()

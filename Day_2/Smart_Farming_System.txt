@@ -1,0 +1,44 @@
+ABSTRACT CLASS Crop
+    ATTRIBUTE name
+    METHOD Constructor(name)
+        SET this.name = name
+    END METHOD
+
+    ABSTRACT METHOD waterRequirement()
+    ABSTRACT METHOD harvest()
+END CLASS
+
+CLASS Rice EXTENDS Crop
+    METHOD Constructor()
+        CALL super("Rice")
+    END METHOD
+
+    METHOD waterRequirement()
+        PRINT "Rice requires 5000 liters per acre."
+    END METHOD
+
+    METHOD harvest()
+        PRINT "Rice is harvested after 120 days."
+    END METHOD
+END CLASS
+
+CLASS Wheat EXTENDS Crop
+    METHOD Constructor()
+        CALL super("Wheat")
+    END METHOD
+
+    METHOD waterRequirement()
+        PRINT "Wheat requires 2500 liters per acre."
+    END METHOD
+
+    METHOD harvest()
+        PRINT "Wheat is harvested after 90 days."
+    END METHOD
+END CLASS
+
+MAIN:
+    CREATE rice = Rice()
+    CREATE wheat = Wheat()
+
+    CALL rice.waterRequirement()
+    CALL wheat.harvest()

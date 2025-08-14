@@ -1,0 +1,21 @@
+CLASS Doctor
+    ATTRIBUTE name, specialization
+    METHOD Constructor(name, specialization)
+        SET attributes
+    END METHOD
+END CLASS
+
+MAIN:
+    CREATE hospitalMap = Map<String, List<Doctor>>()
+
+    // Add doctors
+    ADD "Cardiology" → [Doctor("Dr. A", "Heart"), Doctor("Dr. B", "Heart")]
+    ADD "Neurology" → [Doctor("Dr. C", "Brain")]
+
+    INPUT specializationFilter
+
+    FOR each (department, doctorList) in hospitalMap
+        FILTER doctors where specialization == specializationFilter
+        IF filtered list not empty
+            PRINT department + " : " + filtered doctor names
+        END IF

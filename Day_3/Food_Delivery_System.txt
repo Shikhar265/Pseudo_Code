@@ -1,0 +1,36 @@
+CLASS Customer
+    ATTRIBUTE name, address
+END CLASS
+
+CLASS Restaurant
+    ATTRIBUTE name, location
+END CLASS
+
+CLASS DeliveryBoy
+    ATTRIBUTE name, contact
+END CLASS
+
+CLASS Order
+    ATTRIBUTE customer (Customer)
+    ATTRIBUTE restaurant (Restaurant)
+    ATTRIBUTE deliveryBoy (DeliveryBoy)
+    ATTRIBUTE orderItems (List<String>)
+    ATTRIBUTE totalAmount
+
+    METHOD Constructor(customer, restaurant, deliveryBoy, orderItems, totalAmount)
+        SET attributes
+
+    METHOD printOrderDetails()
+        PRINT "Customer: " + customer.name
+        PRINT "Restaurant: " + restaurant.name
+        PRINT "Delivery Boy: " + deliveryBoy.name
+        PRINT "Items: " + orderItems
+        PRINT "Total: " + totalAmount
+END CLASS
+
+MAIN:
+    CREATE customer1
+    CREATE restaurant1
+    CREATE deliveryBoy1
+    CREATE order1 with above objects and order details
+    CALL order1.printOrderDetails()

@@ -1,0 +1,56 @@
+CLASS Customer
+    ATTRIBUTES:
+        name
+        type   // "normal" or "emergency"
+
+    METHOD Constructor(name, type)
+        SET this.name = name
+        SET this.type = type
+    END METHOD
+END CLASS
+
+
+CLASS CallCenter
+    ATTRIBUTES:
+        normalQueue      // Queue for normal customers
+        emergencyQueue   // Queue for emergency customers
+
+    METHOD Constructor()
+        CREATE empty normalQueue
+        CREATE empty emergencyQueue
+    END METHOD
+
+    METHOD addCustomer(customer)
+        IF customer.type == "emergency" THEN
+            ENQUEUE customer into emergencyQueue
+        ELSE
+            ENQUEUE customer into normalQueue
+        END IF
+    END METHOD
+
+    METHOD serveCustomer()
+        IF emergencyQueue is not empty THEN
+            customer = DEQUEUE from emergencyQueue
+            PRINT "Serving emergency customer: " + customer.name
+        ELSE IF normalQueue is not empty THEN
+            customer = DEQUEUE from normalQueue
+            PRINT "Serving normal customer: " + customer.name
+        ELSE
+            PRINT "No customers waiting."
+        END IF
+    END METHOD
+END CLASS
+
+
+MAIN PROGRAM:
+    CREATE center = CallCenter()
+
+    CALL center.addCustomer(Customer("Alice", "normal"))
+    CALL center.addCustomer(Customer("Bob", "emergency"))
+    CALL center.addCustomer(Customer("Charlie", "normal"))
+
+    CALL center.serveCustomer()  // Serves Bob (emergency)
+    CALL center.serveCustomer()  // Serves Alice (normal)
+    CALL center.serveCustomer()  // Serves Charlie (normal)
+    CALL center.serveCustomer()  // No customers waiting
+END PROGRAM

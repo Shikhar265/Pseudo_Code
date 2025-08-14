@@ -1,0 +1,47 @@
+CLASS TextEditor
+    ATTRIBUTE:
+        text
+        undoStack   // Stack to store previous states of text
+
+    METHOD Constructor()
+        SET text = ""
+        CREATE empty undoStack
+    END METHOD
+
+    METHOD type(newText)
+        PUSH current text onto undoStack   // Save state before change
+        APPEND newText to text
+    END METHOD
+
+    METHOD deleteLast(n)
+        PUSH current text onto undoStack
+        REMOVE last n characters from text
+    END METHOD
+
+    METHOD undo()
+        IF undoStack is not empty THEN
+            SET text = POP from undoStack
+        ELSE
+            PRINT "Nothing to undo."
+        END IF
+    END METHOD
+
+    METHOD showText()
+        PRINT text
+    END METHOD
+END CLASS
+
+
+MAIN PROGRAM:
+    CREATE editor = TextEditor()
+
+    CALL editor.type("Hello")
+    CALL editor.type(" World")
+    CALL editor.showText()   // Output: Hello World
+
+    CALL editor.deleteLast(6) // Removes " World"
+    CALL editor.showText()    // Output: Hello
+
+    CALL editor.undo()
+    CALL editor.showText()    // Output: Hello World
+END PROGRAM

@@ -1,0 +1,21 @@
+CLASS Item
+    ATTRIBUTE name, price
+    METHOD Constructor(name, price)
+        SET attributes
+    END METHOD
+END CLASS
+
+GENERIC METHOD calculateTotalPrice(List<T extends Item>)
+    total = 0
+    FOR each item in list
+        total += item.price
+    END FOR
+    RETURN total
+END METHOD
+
+MAIN:
+    CREATE cart = List<Item>()
+    ADD Item("Laptop", 50000)
+    ADD Item("Mouse", 1000)
+    totalPrice = CALL calculateTotalPrice(cart)
+    PRINT "Total: " + totalPrice

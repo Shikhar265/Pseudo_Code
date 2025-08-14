@@ -1,0 +1,21 @@
+METHOD solveMaze(maze, x, y, solution)
+    IF (x, y) is the exit
+        MARK solution[x][y] = 1
+        RETURN true
+
+    IF (x, y) is valid and not visited
+        MARK solution[x][y] = 1
+
+        IF solveMaze(maze, x+1, y, solution) → RETURN true
+        IF solveMaze(maze, x, y+1, solution) → RETURN true
+        IF solveMaze(maze, x-1, y, solution) → RETURN true
+        IF solveMaze(maze, x, y-1, solution) → RETURN true
+
+        MARK solution[x][y] = 0 // backtrack
+        RETURN false
+
+    RETURN false
+END METHOD
+
+MAIN:
+    CALL solveMaze(starting position)

@@ -1,0 +1,19 @@
+CLASS Patient
+    ATTRIBUTE id, name, age, diagnosis
+END CLASS
+
+MAIN:
+    CREATE patientMap as HashMap<Integer, Patient>()
+
+    // Insert
+    PUT (101, Patient(...))
+    PUT (102, Patient(...))
+
+    // Retrieve
+    patient = GET from patientMap with key 101
+
+    // Update
+    patientMap[101].diagnosis = "Updated Diagnosis"
+
+    // Delete
+    REMOVE key 102 from patientMap

@@ -1,0 +1,30 @@
+CLASS QuizTimer
+    ATTRIBUTE slots[]  // circular array of times per question
+    ATTRIBUTE currentIndex
+
+    METHOD Constructor(timesArray)
+        SET slots = timesArray
+        SET currentIndex = 0
+    END METHOD
+
+    METHOD nextQuestion()
+        INCREMENT currentIndex
+        IF currentIndex >= length(slots)
+            SET currentIndex = 0
+        END IF
+    END METHOD
+
+    METHOD startQuiz()
+        FOR i from 0 to length(slots)-1
+            PRINT "Question " + (i+1) + " - Time allowed: " + slots[currentIndex] + " seconds"
+            IF slots[currentIndex] <= 5
+                PRINT "⚠ Warning: Time almost up!"
+            END IF
+            CALL nextQuestion()
+        END FOR
+    END METHOD
+END CLASS
+
+MAIN:
+    CREATE timer = QuizTimer([10, 15, 5])
+    CALL timer.startQuiz()

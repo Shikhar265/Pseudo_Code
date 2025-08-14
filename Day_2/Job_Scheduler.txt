@@ -1,0 +1,29 @@
+CLASS Job
+    ATTRIBUTE name, deadline, processingTime
+
+    METHOD Constructor(name, deadline, processingTime)
+        SET attributes
+    END METHOD
+END CLASS
+
+CLASS JobScheduler
+    ATTRIBUTE jobQueue // priority queue sorted by earliest deadline, then shortest processing time
+
+    METHOD addJob(job)
+        ENQUEUE job into jobQueue based on priority
+    END METHOD
+
+    METHOD runJobs()
+        WHILE jobQueue is not empty
+            job = DEQUEUE from jobQueue
+            PRINT "Processing job: " + job.name
+        END WHILE
+    END METHOD
+END CLASS
+
+MAIN:
+    CREATE scheduler = JobScheduler()
+    ADD Job("A", 2, 4)
+    ADD Job("B", 1, 3)
+    ADD Job("C", 3, 2)
+    CALL scheduler.runJobs()
